@@ -18,8 +18,16 @@
         {
             "action": "/",
             "accept": {
-                "*/*": [".gpx"]
+                "*/*": [
+                    ".gpx"
+                ]
             }
+        }
+    ],
+    "protocol_handlers": [
+        {
+            "protocol": "geo",
+            "url": "/?show_place=%s"
         }
     ]
 }

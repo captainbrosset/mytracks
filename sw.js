@@ -7,6 +7,7 @@ const INITIAL_RESOURCES_TO_CACHE = [
     '/map.js',
     '/file.js',
     '/storage.js',
+    '/routing.js',
 ];
 
 // On install, fill the cache with the initial resources.
@@ -24,14 +25,14 @@ self.addEventListener('fetch', event => {
 
         try {
             const fetchResponse = await fetch(event.request);
-            if (!event.request.url.includes('bing.com')) {
+            if (!event.request.url.includes('bing.com') && fetchResponse.status === 200) {
                 // Save the new resource in the cache (responses are streams, so we need to clone in order to use it here).
                 cache.put(event.request, fetchResponse.clone());
             }
 
             // And return it.
             return fetchResponse;
-        } catch (e) {
+        } finally {
             // Fetching didn't work let's go to the cache.
             const cachedResponse = await cache.match(event.request);
             if (cachedResponse !== undefined) {

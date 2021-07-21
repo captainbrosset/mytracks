@@ -1,6 +1,7 @@
 'use strict';
 
 const tracksEl = document.querySelector('.tracks');
+
 let map;
 
 function getMap() {
@@ -31,7 +32,7 @@ function createTrackEntry(track) {
 }
 
 function clearMap() {
-    map.entities.push(data.shapes);
+    map.entities.clear();
 }
 
 function displayTrackFromGPXContent(content) {
@@ -52,7 +53,21 @@ function displayTrackFromGPXContent(content) {
             clearMap();
             const name = data.shapes[0].metadata.title;
             map.setView({bounds: data.summary.bounds, padding: 0});
+            map.entities.push(data.shapes);
             store.addTrack(name, content);
         }
     });
+}
+
+function showPlaceOnMap(lat, long) {
+    // When we're opened from a protocol handler, the map might not have been init yet. Wait for it.
+    // FIXME: need to find something better as this keeps coming up.
+    if (!map) {
+        setTimeout(() => {
+            showPlaceOnMap(lat, long);
+        }, 100);
+        return;
+    }
+
+    map.setView({center: new Microsoft.Maps.Location(lat, long)});
 }
