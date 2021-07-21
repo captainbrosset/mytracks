@@ -1,0 +1,38 @@
+html, body {
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+	display: grid;
+	grid-template-columns: 1fr 250px;
+    grid-template-rows: min-content 1fr;
+}
+
+h1 {
+    grid-column: span 2;
+}
+
+#map-container {
+    position: relative;
+}
+
+.tracks .track {
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.tracks .track:hover {
+    background: #eee;
+}
