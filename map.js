@@ -5,29 +5,33 @@ let map;
 
 function getMap() {
     map = new Microsoft.Maps.Map('#map-container');
-    // Disable this for now, we'll later add local storage to store added tracks.
-    // displayTracks();
+    displayTracks();
 }
 
-function displayTracks() {
+async function displayTracks() {
     tracksEl.innerHTML = '';
 
+    const tracks = await store.getAllTracks();
     for (const track of tracks) {
         const li = createTrackEntry(track);
         tracksEl.appendChild(li);
     }
 }
 
-function createTrackEntry(name) {
+function createTrackEntry(track) {
     const li = document.createElement('li');
     li.classList.add('track');
-    li.textContent = name;
+    li.textContent = track.name;
 
     li.addEventListener('click', () => {
-        loadTrackToMap(`tracks/${name}`);
+        displayTrackFromGPXContent(track.content);
     });
 
     return li;
+}
+
+function clearMap() {
+    map.entities.push(data.shapes);
 }
 
 function displayTrackFromGPXContent(content) {
@@ -45,7 +49,10 @@ function displayTrackFromGPXContent(content) {
 
         map.entities.clear();
         if (data.shapes) {
-            map.entities.push(data.shapes);
+            clearMap();
+            const name = data.shapes[0].metadata.title;
+            map.setView({bounds: data.summary.bounds, padding: 0});
+            store.addTrack(name, content);
         }
     });
 }

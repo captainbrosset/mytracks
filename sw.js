@@ -6,6 +6,7 @@ const INITIAL_RESOURCES_TO_CACHE = [
     '/style.css',
     '/map.js',
     '/file.js',
+    '/storage.js',
 ];
 
 // On install, fill the cache with the initial resources.
