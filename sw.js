@@ -5,6 +5,7 @@ const INITIAL_RESOURCES_TO_CACHE = [
     '/error.html',
     '/style.css',
     '/map.js',
+    '/file.js',
 ];
 
 // On install, fill the cache with the initial resources.
@@ -15,27 +16,28 @@ self.addEventListener('install', event => {
     })());
 });
 
-// On fetch events, look for the resource in the cache, or download from the network.
+// On fetch events, do a network-first approach, so we can more easily work on the app for the timebeing.
 self.addEventListener('fetch', event => {
     event.respondWith((async () => {
         const cache = await caches.open(CACHE_NAME);
-        
-        const response = await cache.match(event.request);
-        if (response !== undefined) {
-            // Cache hit, let's send the cached resource.
-            return response;
-        } else {
-            // Cache miss, let's fetch the resource
-            try {
-                const fetchResponse = await fetch(event.request);
 
+        try {
+            const fetchResponse = await fetch(event.request);
+            if (!event.request.url.includes('bing.com')) {
                 // Save the new resource in the cache (responses are streams, so we need to clone in order to use it here).
                 cache.put(event.request, fetchResponse.clone());
+            }
 
-                // And return it.
-                return fetchResponse;
-            } catch (e) {
-                // Fetching the resource didn't work, let's go to the error page if this was a navigation request.
+            // And return it.
+            return fetchResponse;
+        } catch (e) {
+            // Fetching didn't work let's go to the cache.
+            const cachedResponse = await cache.match(event.request);
+            if (cachedResponse !== undefined) {
+                // Cache hit, let's send the cached resource.
+                return cachedResponse;
+            } else {
+                // Nothing in cache, let's go to the error page.
                 if (event.request.mode === 'navigate') {
                     const errorResponse = await cache.match('error.html');
                     return errorResponse;

@@ -5,14 +5,9 @@ let map;
 
 function getMap() {
     map = new Microsoft.Maps.Map('#map-container');
-    displayTracks();
+    // Disable this for now, we'll later add local storage to store added tracks.
+    // displayTracks();
 }
-
-const tracks = [
-    'activity_7156173446.gpx',
-    'activity_7129487986.gpx',
-    'activity_7079829402.gpx',
-];
 
 function displayTracks() {
     tracksEl.innerHTML = '';
@@ -35,10 +30,22 @@ function createTrackEntry(name) {
     return li;
 }
 
-function loadTrackToMap(fileName) {
+function displayTrackFromGPXContent(content) {
+    // When opening a file from the disk, the queue consumer gets called earlier than the map initialization logic.
+    // So we need to wait here for the map to be ready before proceeding.
+    if (!map) {
+        setTimeout(() => {
+            displayTrackFromGPXContent(content);
+        }, 100);
+        return;
+    }
+
     Microsoft.Maps.loadModule('Microsoft.Maps.GeoXml', function () {
-        const layer = new Microsoft.Maps.GeoXmlLayer(fileName, true);
-        map.layers.clear();
-        map.layers.insert(layer);
+        const data = Microsoft.Maps.GeoXml.read(content);
+
+        map.entities.clear();
+        if (data.shapes) {
+            map.entities.push(data.shapes);
+        }
     });
 }

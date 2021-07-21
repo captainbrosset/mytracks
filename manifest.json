@@ -13,5 +13,13 @@
             "src": "media/icon512.png",
             "sizes": "512x512"
         }
+    ],
+    "file_handlers": [
+        {
+            "action": "/",
+            "accept": {
+                "*/*": [".gpx"]
+            }
+        }
     ]
 }
