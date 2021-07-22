@@ -26,6 +26,11 @@ class TracksStore {
         await this.ensureInit();
         await localforage.setItem(name, content);
     }
+
+    async deleteTrack(name) {
+        await this.ensureInit();
+        await localforage.removeItem(name);
+    }
 }
 
 const store = new TracksStore();
