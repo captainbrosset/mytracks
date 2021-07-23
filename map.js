@@ -99,6 +99,7 @@ class MapUI {
         });
     
         const exportBtn = document.createElement('button');
+        exportBtn.classList.add('link');
         exportBtn.textContent = 'export';
         li.appendChild(exportBtn);
         exportBtn.addEventListener('click', async () => {
@@ -106,6 +107,7 @@ class MapUI {
         });
     
         const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('link');
         deleteBtn.textContent = 'delete';
         li.appendChild(deleteBtn);
         deleteBtn.addEventListener('click', async () => {
