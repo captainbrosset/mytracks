@@ -7,7 +7,7 @@ class TracksStore {
     }
 
     static id() {
-        return Date.now();
+        return 'id-' + Date.now();
     }
 
     async ensureInit() {

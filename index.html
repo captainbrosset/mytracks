@@ -7,7 +7,13 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body onload="mapUI.init();">
-    <h1>My Tracks</h1>
+    <header>
+        <h1>My Tracks</h1>
+        <label class="import-label link">
+            Import track
+            <input type="file" class="import-button" />
+        </label>
+    </header>
     <div id="map-container"></div>
     <ul class="tracks"></ul>
     <script src="sw-register.js"></script>

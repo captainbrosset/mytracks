@@ -9,13 +9,13 @@ if ('launchQueue' in window) {
             return;
         }
         // Handle the first file only.
-        handleOpenFile(launchParams.files[0]);
+        handleFileFromFileHandlingAPI(launchParams.files[0]);
     });
 } else {
     console.error('File handling API is not supported!');
 }
 
-async function handleOpenFile(fileHandle) {
+async function handleFileFromFileHandlingAPI(fileHandle) {
     console.log(`Opening ${fileHandle.name}`);
 
     const blob = await fileHandle.getFile();
@@ -23,11 +23,30 @@ async function handleOpenFile(fileHandle) {
 
     const contents = await blob.text();
 
+    await addFile(contents);
+}
+
+document.querySelector('.import-button').addEventListener('change', handleFileFromFileInputField);
+
+function handleFileFromFileInputField(event) {
+    const file = event.target.files[0];
+    if (!file) {
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = async e => {
+        await addFile(e.target.result);
+    };
+    reader.readAsText(file);
+}
+
+async function addFile(contents) {
     const parser = new DOMParser();
     const parsedDoc = parser.parseFromString(contents, "application/xml");
 
     const date = new Date(parsedDoc.querySelector('metadata time').textContent);
     const title = parsedDoc.querySelector('trk name').textContent;
 
-    store.addTrack(contents, date, title);
+    await store.addTrack(contents, date, title);
 }
