@@ -22,5 +22,12 @@ async function handleOpenFile(fileHandle) {
     blob.handle = fileHandle;
 
     const contents = await blob.text();
-    displayTrackFromGPXContent(contents);
+
+    const parser = new DOMParser();
+    const parsedDoc = parser.parseFromString(contents, "application/xml");
+
+    const date = new Date(parsedDoc.querySelector('metadata time').textContent);
+    const title = parsedDoc.querySelector('trk name').textContent;
+
+    store.addTrack(contents, date, title);
 }
