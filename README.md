@@ -8,3 +8,4 @@ Before using the app, you will need to enable these flags in Edge or Chrome in `
 
 * `#file-handling-api`
 * `#enable-desktop-pwas-protocol-handling`
+* `#enable-desktop-pwas-window-controls-overlay`

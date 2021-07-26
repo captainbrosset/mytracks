@@ -37,6 +37,7 @@ class MapUI {
             showTrafficButton: false,
             showTermsLink: false,
             disableStreetside: true,
+            showMapTypeSelector: false,
         });
         this.update();
         store.onUpdate(this.update.bind(this));
@@ -156,7 +157,7 @@ function download(track) {
 
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(track.content));
-    element.setAttribute('download', filename);
+    element.setAttribute('download', safeName);
 
     element.style.display = 'none';
     document.body.appendChild(element);

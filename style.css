@@ -1,101 +1,139 @@
 html {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    background: black;
-    color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  background: black;
+  color: white;
 }
 
-input, button {
-    font-size: 10pt;
+input,
+button {
+  font-size: 10pt;
 }
 
-html, body {
-    margin: 0;
-    overflow: hidden;
-    height: 100%;
-}
-
-h1, h2, h3 {
-    margin: 0;
-}
-
-ul, li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
+html,
 body {
-	display: grid;
-	grid-template-columns: 1fr 300px;
-    grid-template-rows: min-content 1fr;
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 header {
-    grid-column: span 2;
+  position: fixed;
+  /* Use the environment variable for the left anchoring with a fallback. */
+  left: env(titlebar-area-x, 0);
+  /* Use the environment variable for the top anchoring with a fallback. */
+  top: env(titlebar-area-y, 0);
+  /* Use the environment variable for setting the width with a fallback. */
+  width: env(titlebar-area-width, 100%);
+  /* Use the environment variable for setting the height with a fallback. */
+  height: env(titlebar-area-height, 33px);
+  z-index: 1;
+}
+
+header {
+  -webkit-app-region: drag;
+  app-region: drag;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: #1c2a36e8;
+}
+
+header::before {
+  content: "";
+  background: url(media/icon512.png);
+  background-size: contain;
+  height: 100%;
+  width: 33px;
+  background-repeat: no-repeat;
+}
+
+header .import-label {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr calc(100% - env(titlebar-area-width));
+  height: 100%
 }
 
 #map-container {
-    position: relative;
+  position: relative;
 }
 
 .tracks {
-    overflow-y: auto;
+  overflow-y: auto;
+  margin-top: env(titlebar-area-height, 33px);
 }
 
 .track {
-    padding: 1rem;
-    display: grid;
-    gap: 0 1rem;
-    grid-template-columns: min-content min-content 1fr min-content;
+  padding: 1rem;
+  display: grid;
+  gap: 0 1rem;
+  grid-template-columns: min-content min-content 1fr min-content;
 }
 
 .track:nth-child(2n+1) {
-    background: #222;
+  background: #222;
 }
 
 .track .name {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    grid-column: 2 / 4;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  grid-column: 2 / 4;
 }
 
 .link {
-    text-decoration: underline;
-    text-underline-offset: .1rem;
-    cursor: pointer;
-    color: #d0cf1d;
+  text-decoration: underline;
+  text-underline-offset: .1rem;
+  cursor: pointer;
+  color: #d0cf1d;
 }
 
 .track button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    width: min-content;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: min-content;
 }
 
 .track input[type="color"] {
-    clip-path: circle(6px);
-    width: 18px;
-    padding: 0;
-    border: 0;
-    height: 21px;
+  clip-path: circle(6px);
+  width: 18px;
+  padding: 0;
+  border: 0;
+  height: 21px;
 }
 
 .track .toggle {
-    grid-column: 1;
-    grid-row: 1 / 3;
-    place-self: center;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  place-self: center;
 }
 
 .track .color {
-    grid-column: 4;
-    grid-row: 1 / 3;
-    place-self: center;
+  grid-column: 4;
+  grid-row: 1 / 3;
+  place-self: center;
 }
 
 .import-button {
-    display: none;
+  display: none;
 }

@@ -4,8 +4,8 @@
     "short_name": "mytracks",
     "description": "Import, export and visualize GPS tracks",
     "start_url": "/",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
+    "background_color": "#000000",
+    "theme_color": "#000000",
     "orientation": "any",
     "display": "standalone",
     "icons": [
@@ -29,5 +29,6 @@
             "protocol": "geo",
             "url": "/?show_place=%s"
         }
-    ]
+    ],
+    "display_override": ["window-controls-overlay"]
 }
