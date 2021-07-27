@@ -30,5 +30,19 @@
             "url": "/?show_place=%s"
         }
     ],
-    "display_override": ["window-controls-overlay"]
+    "display_override": ["window-controls-overlay"],
+    "shortcuts" : [
+        {
+          "name": "Show all tracks",
+          "url": "/?show_all=true",
+          "description": "Show all of my tracks",
+          "icons": [{ "src": "/media/show192.png", "sizes": "192x192" }]
+        },
+        {
+          "name": "Hide all tracks",
+          "url": "/?show_all=false",
+          "description": "Hide all of my tracks",
+          "icons": [{ "src": "/media/hide192.png", "sizes": "192x192" }]
+        }
+      ]
 }

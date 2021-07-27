@@ -12,3 +12,8 @@ if (currentUrl.searchParams.has('show_place')) {
         showPlaceOnMap(latitude, longitude);
     }
 }
+
+if (currentUrl.searchParams.has('show_all')) {
+    const isVisible = currentUrl.searchParams.get('show_all') === 'true';
+    mapUI.toggleAllTrackStates(isVisible);
+}
