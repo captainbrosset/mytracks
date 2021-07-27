@@ -1,3 +1,7 @@
+:root {
+  --title-bar-fallback-height: 33px;
+}
+
 html {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10pt;
@@ -31,6 +35,13 @@ li {
 }
 
 header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: #1c2a36e8;
+}
+
+.has-control-overlay header {
   position: fixed;
   /* Use the environment variable for the left anchoring with a fallback. */
   left: env(titlebar-area-x, 0);
@@ -39,17 +50,16 @@ header {
   /* Use the environment variable for setting the width with a fallback. */
   width: env(titlebar-area-width, 100%);
   /* Use the environment variable for setting the height with a fallback. */
-  height: env(titlebar-area-height, 33px);
+  height: env(titlebar-area-height, var(--title-bar-fallback-height));
+  
   z-index: 1;
-}
-
-header {
   -webkit-app-region: drag;
   app-region: drag;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  background: #1c2a36e8;
+}
+
+html:not(.has-control-overlay) body {
+  display: grid;
+  grid-template-rows: var(--title-bar-fallback-height) 1fr;
 }
 
 header::before {
@@ -57,19 +67,23 @@ header::before {
   background: url(media/icon512.png);
   background-size: contain;
   height: 100%;
-  width: 33px;
+  width: var(--title-bar-fallback-height);
   background-repeat: no-repeat;
 }
 
-header .import-label {
+header .link {
   -webkit-app-region: no-drag;
   app-region: no-drag;
 }
 
 main {
   display: grid;
-  grid-template-columns: 1fr calc(100% - env(titlebar-area-width));
+  grid-template-columns: 1fr 300px;
   height: 100%
+}
+
+.has-control-overlay main {
+  grid-template-columns: 1fr calc(100% - env(titlebar-area-width));
 }
 
 #map-container {
@@ -78,7 +92,10 @@ main {
 
 .tracks {
   overflow-y: auto;
-  margin-top: env(titlebar-area-height, 33px);
+}
+
+.has-control-overlay .tracks {
+  margin-top: env(titlebar-area-height);
 }
 
 .track {

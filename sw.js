@@ -7,7 +7,9 @@ const INITIAL_RESOURCES_TO_CACHE = [
     '/map.js',
     '/file.js',
     '/storage.js',
+    '/localforage.js',
     '/routing.js',
+    '/app.js',
 ];
 
 // On install, fill the cache with the initial resources.
