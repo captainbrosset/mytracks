@@ -45,7 +45,8 @@ async function addFile(contents) {
     const parser = new DOMParser();
     const parsedDoc = parser.parseFromString(contents, "application/xml");
 
-    const date = new Date(parsedDoc.querySelector('metadata time').textContent);
+    const timeEl = parsedDoc.querySelector('metadata time');
+    const date = timeEl ? new Date(timeEl.textContent) : null;
     const title = parsedDoc.querySelector('trk name').textContent;
 
     await store.addTrack(contents, date, title);
