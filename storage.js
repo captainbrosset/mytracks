@@ -63,6 +63,15 @@ class TracksStore {
         this.callListeners();
     }
 
+    async setAllTracksVisibility(visible) {
+        await this.ensureInit();
+        for (const {id, track} of await this.getAllTracks()) {
+            track.visible = visible;
+            await localforage.setItem(id, track);
+        }
+        this.callListeners();
+    }
+
     onUpdate(cb) {
         this.listeners.push(cb);
     }

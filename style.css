@@ -51,7 +51,6 @@ header {
   width: env(titlebar-area-width, 100%);
   /* Use the environment variable for setting the height with a fallback. */
   height: env(titlebar-area-height, var(--title-bar-fallback-height));
-  
   z-index: 1;
   -webkit-app-region: drag;
   app-region: drag;
@@ -96,6 +95,17 @@ main {
 
 .has-control-overlay .tracks {
   margin-top: env(titlebar-area-height);
+}
+
+.tracks .toolbar {
+  padding: 1rem;
+  background: #2f3f52;
+}
+
+.tracks .toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .track {

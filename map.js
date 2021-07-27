@@ -41,6 +41,11 @@ class MapUI {
         });
         this.update();
         store.onUpdate(this.update.bind(this));
+
+        const toggleAll = document.querySelector('.tracks .toolbar  input');
+        toggleAll.addEventListener('input', () => {
+            this.toggleAllTrackStates(toggleAll.checked);
+        });
     }
 
     async update() {
@@ -49,7 +54,7 @@ class MapUI {
         const tracks = await store.getAllTracks();
 
         // 1. Refresh the track list in the sidebar.
-        this.tracksEl.innerHTML = '';
+        this.tracksEl.querySelectorAll('.track').forEach(track => track.remove());
     
         for (const {id, track} of tracks) {
             const li = this.createTrackEntry(id, track);
@@ -116,6 +121,10 @@ class MapUI {
         });
     
         return li;
+    }
+
+    async toggleAllTrackStates(state) {
+        await store.setAllTracksVisibility(state);
     }
 
     async toggleTrackState(id, state) {
