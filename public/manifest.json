@@ -3,7 +3,7 @@
     "name": "My Tracks",
     "short_name": "mytracks",
     "description": "Import, export and visualize GPS tracks",
-    "start_url": "/mytracks",
+    "scope": "/mytracks/",
     "background_color": "#000000",
     "theme_color": "#000000",
     "orientation": "any",
