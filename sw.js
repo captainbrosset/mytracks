@@ -1,10 +1,10 @@
 const CACHE_NAME = 'mytracks-cache-v1';
 const INITIAL_RESOURCES_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/error.html',
-    '/style.css',
-    '/dist/bundle.js',
+    '/mytracks/',
+    '/mytracks/index.html',
+    '/mytracks/error.html',
+    '/mytracks/style.css',
+    '/mytracks/bundle.js',
 ];
 
 // On install, fill the cache with the initial resources.

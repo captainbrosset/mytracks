@@ -3,7 +3,7 @@
     "name": "My Tracks",
     "short_name": "mytracks",
     "description": "Import, export and visualize GPS tracks",
-    "start_url": "/",
+    "start_url": "/mytracks",
     "background_color": "#000000",
     "theme_color": "#000000",
     "orientation": "any",
@@ -36,13 +36,13 @@
           "name": "Show all tracks",
           "url": "/?show_all=true",
           "description": "Show all of my tracks",
-          "icons": [{ "src": "/media/show192.png", "sizes": "192x192" }]
+          "icons": [{ "src": "/mytracks/media/show192.png", "sizes": "192x192" }]
         },
         {
           "name": "Hide all tracks",
           "url": "/?show_all=false",
           "description": "Hide all of my tracks",
-          "icons": [{ "src": "/media/hide192.png", "sizes": "192x192" }]
+          "icons": [{ "src": "/mytracks/media/hide192.png", "sizes": "192x192" }]
         }
       ]
 }
