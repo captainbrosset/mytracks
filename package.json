@@ -1,0 +1,16 @@
+{
+  "name": "mytracks",
+  "version": "1.0.0",
+  "description": "Sample web app to demonstrate some desktop PWA features",
+  "scripts": {
+    "build": "npx webpack"
+  },
+  "author": "Patrick Brosset",
+  "devDependencies": {
+    "webpack": "^5.49.0",
+    "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "localforage": "^1.9.0"
+  }
+}
