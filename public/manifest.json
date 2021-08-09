@@ -10,13 +10,13 @@
     "display": "standalone",
     "icons": [
         {
-            "src": "media/icon512.png",
+            "src": "/mytracks/media/icon512.png",
             "sizes": "512x512"
         }
     ],
     "file_handlers": [
         {
-            "action": "/",
+            "action": "/mytracks",
             "accept": {
                 "*/*": [
                     ".gpx"
@@ -27,14 +27,14 @@
     "protocol_handlers": [
         {
             "protocol": "geo",
-            "url": "/?show_place=%s"
+            "url": "/mytracks?show_place=%s"
         }
     ],
     "display_override": ["window-controls-overlay"],
     "shortcuts" : [
         {
           "name": "Show all tracks",
-          "url": "/?show_all=true",
+          "url": "/mytracks?show_all=true",
           "description": "Show all of my tracks",
           "icons": [{ "src": "/mytracks/media/show192.png", "sizes": "192x192" }]
         },
