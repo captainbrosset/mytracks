@@ -1,0 +1,48 @@
+{
+    "lang": "en-us",
+    "name": "My Tracks",
+    "short_name": "mytracks",
+    "description": "Import, export and visualize GPS tracks",
+    "start_url": "/",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "media/icon512.png",
+            "sizes": "512x512"
+        }
+    ],
+    "file_handlers": [
+        {
+            "action": "/",
+            "accept": {
+                "*/*": [
+                    ".gpx"
+                ]
+            }
+        }
+    ],
+    "protocol_handlers": [
+        {
+            "protocol": "geo",
+            "url": "/?show_place=%s"
+        }
+    ],
+    "display_override": ["window-controls-overlay"],
+    "shortcuts" : [
+        {
+          "name": "Show all tracks",
+          "url": "/?show_all=true",
+          "description": "Show all of my tracks",
+          "icons": [{ "src": "/media/show192.png", "sizes": "192x192" }]
+        },
+        {
+          "name": "Hide all tracks",
+          "url": "/?show_all=false",
+          "description": "Hide all of my tracks",
+          "icons": [{ "src": "/media/hide192.png", "sizes": "192x192" }]
+        }
+      ]
+}
