@@ -44,6 +44,10 @@ Tracks are only stored locally (using IndexedDB).
 * **[URL handler](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/experimental-features/#url-link-handling)**
   * **TODO**
 
+### Note on multiple app instances
+
+For now, there isn't a way for desktop PWAs to control how apps are launched (there is [work happening on this topic](https://github.com/alancutter/manifest-incubations/blob/launch-handler/launch_handler-explainer.md)). This is why any action outside of the app that ends up launching it will start a new instance instead of reusing an already opened one.
+
 ## Build the app locally
 
 * `npm install`
