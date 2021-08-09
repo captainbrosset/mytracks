@@ -13,21 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check-out the repo under $GITHUB_WORKSPACE
       - name: Checkout repo
         uses: actions/checkout@v2
-
-      # Install deps
       - name: Install deps
         uses: bahmutov/npm-install@v1
-      
-      # Build with webpack
       - name: Build webpack
         run: npx webpack
-      
-      # Publish to github pages
-      - name: Deploy
+      - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_dir: $GITHUB_WORKSPACE
+          publish_dir: ./public
           github_token: ${{ secrets.GITHUB_TOKEN }}
