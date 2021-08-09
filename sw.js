@@ -4,12 +4,7 @@ const INITIAL_RESOURCES_TO_CACHE = [
     '/index.html',
     '/error.html',
     '/style.css',
-    '/map.js',
-    '/file.js',
-    '/storage.js',
-    '/localforage.js',
-    '/routing.js',
-    '/app.js',
+    '/dist/bundle.js',
 ];
 
 // On install, fill the cache with the initial resources.
@@ -20,7 +15,7 @@ self.addEventListener('install', event => {
     })());
 });
 
-// On fetch events, do a network-first approach, so we can more easily work on the app for the timebeing.
+// On fetch events, do a network-first approach, so we can more easily work on the app for the time being.
 self.addEventListener('fetch', event => {
     event.respondWith((async () => {
         const cache = await caches.open(CACHE_NAME);

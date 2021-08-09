@@ -1,4 +1,4 @@
-'use strict';
+import { store } from "./storage";
 
 if ('launchQueue' in window) {
     console.log('File handling API is supported!');

@@ -1,14 +1,4 @@
-const debounce = (func, wait) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
+import { debounce } from "./utils";
 
 if ('windowControlsOverlay' in navigator) {
     document.documentElement.classList.toggle('has-control-overlay', navigator.windowControlsOverlay.visible);

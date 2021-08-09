@@ -1,4 +1,5 @@
-'use strict';
+import { store } from './storage';
+import { download } from './utils';
 
 class MapUI {
     constructor() {
@@ -109,7 +110,7 @@ class MapUI {
         exportBtn.textContent = 'export';
         li.appendChild(exportBtn);
         exportBtn.addEventListener('click', async () => {
-            download(track);
+            download(generateTrackFileName(track.title), track.content);
         });
     
         const deleteBtn = document.createElement('button');
@@ -159,22 +160,7 @@ class MapUI {
     }
 }
 
-const mapUI = new MapUI();
-
-function download(track) {
-    const safeName = generateTrackFileName(track.title);
-
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(track.content));
-    element.setAttribute('download', safeName);
-
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
-}
+export const mapUI = new MapUI();
 
 function generateTrackFileName(name) {
     return name.replace(/\s+/g, '-') + '.gpx';

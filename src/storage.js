@@ -1,4 +1,4 @@
-'use strict';
+import localforage from "localforage";
 
 class TracksStore {
     constructor() {
@@ -81,4 +81,4 @@ class TracksStore {
     }
 }
 
-const store = new TracksStore();
+export const store = new TracksStore();
