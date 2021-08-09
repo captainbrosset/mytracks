@@ -4,6 +4,7 @@
     "short_name": "mytracks",
     "description": "Import, export and visualize GPS tracks",
     "scope": "/mytracks/",
+    "start_url": "/mytracks/index.html",
     "background_color": "#000000",
     "theme_color": "#000000",
     "orientation": "any",
@@ -16,7 +17,7 @@
     ],
     "file_handlers": [
         {
-            "action": "/mytracks",
+            "action": "/mytracks/",
             "accept": {
                 "*/*": [
                     ".gpx"
@@ -27,20 +28,20 @@
     "protocol_handlers": [
         {
             "protocol": "geo",
-            "url": "/mytracks?show_place=%s"
+            "url": "/mytracks/?show_place=%s"
         }
     ],
     "display_override": ["window-controls-overlay"],
     "shortcuts" : [
         {
           "name": "Show all tracks",
-          "url": "/mytracks?show_all=true",
+          "url": "/mytracks/?show_all=true",
           "description": "Show all of my tracks",
           "icons": [{ "src": "/mytracks/media/show192.png", "sizes": "192x192" }]
         },
         {
           "name": "Hide all tracks",
-          "url": "/?show_all=false",
+          "url": "/mytracks/?show_all=false",
           "description": "Hide all of my tracks",
           "icons": [{ "src": "/mytracks/media/hide192.png", "sizes": "192x192" }]
         }
