@@ -45,5 +45,10 @@
           "description": "Hide all of my tracks",
           "icons": [{ "src": "/mytracks/media/hide192.png", "sizes": "192x192" }]
         }
-      ]
+    ],
+    "url_handlers": [
+        {
+          "origin": "https://patrickbrosset.com"
+        }
+    ]
 }
