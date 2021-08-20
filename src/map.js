@@ -4,6 +4,7 @@ import { download } from './utils';
 class MapUI {
     constructor() {
         this.map = null;
+        this.currentFilter = '';
         this.currentBounds = [];
         this.tracksEl = document.querySelector('.tracks');
     }
@@ -32,6 +33,7 @@ class MapUI {
     }
 
     init() {
+        // Create the map.
         this.map = new Microsoft.Maps.Map('#map-container', {
             disableBirdseye: true,
             enableClickableLogo: false,
@@ -41,11 +43,22 @@ class MapUI {
             showMapTypeSelector: false,
         });
         this.update();
+
+        // React to store updates (any time a track is added/edited/removed we update the list).
         store.onUpdate(this.update.bind(this));
 
-        const toggleAll = document.querySelector('.tracks .toolbar  input');
-        toggleAll.addEventListener('input', () => {
-            this.toggleAllTrackStates(toggleAll.checked);
+        // Wire the various UI elements.
+        const showAll = document.querySelector('.show-all');
+        showAll.addEventListener('click', () => this.toggleAllTrackStates(true));
+        const hideAll = document.querySelector('.hide-all');
+        hideAll.addEventListener('click', () => this.toggleAllTrackStates(false));
+
+        const searchInput = document.querySelector('.search input');
+        searchInput.addEventListener('keyup', () => {
+            this.currentFilter = searchInput.value.toLowerCase();
+
+            // Force an update.
+            this.update();
         });
     }
 
@@ -58,6 +71,10 @@ class MapUI {
         this.tracksEl.querySelectorAll('.track').forEach(track => track.remove());
     
         for (const {id, track} of tracks) {
+            if (this.currentFilter && !track.title.toLowerCase().includes(this.currentFilter)) {
+                continue;
+            }
+
             const li = this.createTrackEntry(id, track);
             this.tracksEl.appendChild(li);
         }
