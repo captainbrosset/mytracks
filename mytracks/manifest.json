@@ -19,7 +19,7 @@
         {
             "action": "/mytracks/",
             "accept": {
-                "*/*": [
+                "text/xml": [
                     ".gpx"
                 ]
             }
